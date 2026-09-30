@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Цифровизация Туркестанской области — отчёт руководству</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f7fb;
+    --surface: #ffffff;
+    --surface-2: #f7f9fc;
+    --border: #e7ebf2;
+    --text: #10192e;
+    --text-2: #526080;
+    --text-3: #98a2ba;
+    --accent: #2454d6;
+    --accent-2: #0f9e8f;
+    --accent-3: #6d4fe0;
+    --accent-soft: #eaf0ff;
+    --success: #128a5c;
+    --success-soft: #e7f7ef;
+    --warning: #b56a0a;
+    --warning-soft: #fdf1e0;
+    --danger: #c3303f;
+    --danger-soft: #fbeaec;
+    --radius: 14px;
+    --shadow-sm: 0 1px 2px rgba(20,30,60,.05);
+    --shadow-md: 0 14px 34px -16px rgba(20,30,70,.18);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  #root { min-height: 100vh; }
+  ::selection { background: var(--accent-soft); color: var(--accent); }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(8px);} to {opacity:1; transform:translateY(0);} }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- Top header ---------- */
+  .topheader {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 14px calc(28px + env(safe-area-inset-left,0px)) 14px calc(28px + env(safe-area-inset-left,0px));
+    padding-top: calc(14px + env(safe-area-inset-top, 0px));
+    display: flex; align-items: center; gap: 26px; flex-wrap: wrap; position: sticky; top:0; z-index: 20;
+  }
+  .th-brand { display: flex; align-items: center; gap: 11px; margin-right: 6px; }
+  .th-mark {
+    width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display:flex; align-items:center; justify-content:center; color:#fff;
+    font-family:"Manrope",sans-serif; font-weight:800; font-size:16px;
+  }
+  .th-name { font-family:"Manrope",sans-serif; font-weight:800; font-size: 14.5px; color: var(--text); line-height:1.25; }
+  .th-sub { font-size: 11px; color: var(--text-3); margin-top:1px; }
+  .th-tabs { display:flex; gap: 4px; flex: 1; flex-wrap: wrap; }
+  .th-tab {
+    background: none; border: none; font: inherit; cursor: pointer; color: var(--text-2);
+    font-size: 13.5px; font-weight: 600; padding: 9px 13px; border-radius: 8px;
+    position: relative; transition: color .15s ease, background .15s ease;
+  }
+  .th-tab:hover { color: var(--accent); background: var(--surface-2); }
+  .th-tab.active { color: var(--accent); }
+  .th-tab.active::after {
+    content:""; position:absolute; left:13px; right:13px; bottom:-1px; height:2px; background: var(--accent); border-radius: 2px;
+  }
+  .th-actions { display:flex; align-items:center; gap:10px; }
+  .btn {
+    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    padding: 8px 14px; border-radius: 9px; font-size: 12.8px; cursor: pointer; font-weight: 600;
+    transition: all .15s ease;
+  }
+  .btn:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent-3)); border-color: transparent; color: #fff; }
+  .btn.primary:hover { filter:brightness(1.07); color:#fff; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; overflow: hidden; color: #fff;
+    background: linear-gradient(120deg, #16255c 0%, #234ac9 55%, #1c8f95 130%);
+    padding: 30px 30px 34px;
+  }
+  .hero-decor { position:absolute; inset:0; opacity:.5; }
+  .hero-inner { position: relative; max-width: 1200px; }
+  .crumbs { font-size: 12.5px; color: rgba(255,255,255,.72); display:flex; align-items:center; gap:7px; margin-bottom: 14px; flex-wrap: wrap; }
+  .crumbs b { color: #fff; font-weight: 600; }
+  .crumbs .sep { opacity: .5; }
+  .hero-title { font-family:"Manrope",sans-serif; font-size: 27px; font-weight: 800; margin: 0; letter-spacing: -.01em; }
+  .hero-meta { display:flex; align-items:center; gap:10px; margin-top: 14px; flex-wrap: wrap; }
+  .hero-pill {
+    font-size: 11.8px; font-weight: 600; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25);
+    padding: 6px 12px; border-radius: 20px; color: #fff; backdrop-filter: blur(3px);
+  }
+
+  /* ---------- Layout ---------- */
+  .layout { display: flex; align-items: flex-start; max-width: 1280px; margin: 0 auto; padding: 26px 26px 70px; gap: 26px; }
+  .sidebar-col { width: 250px; flex-shrink: 0; position: sticky; top: 84px; }
+  .sidebar-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px; box-shadow: var(--shadow-sm); }
+  .side-link {
+    display:block; padding: 11px 14px; border-radius: 9px; font-size: 13.6px; font-weight: 600; color: var(--text-2);
+    cursor: pointer; margin-bottom: 2px; transition: background .15s ease, color .15s ease;
+  }
+  .side-link:hover { background: var(--surface-2); color: var(--text); }
+  .side-link.active { color: var(--accent); background: var(--accent-soft); }
+
+  .content-col { flex: 1; min-width: 0; }
+
+  @media (max-width: 880px) {
+    .layout { flex-direction: column; padding: 18px; }
+    .sidebar-col { width: 100%; position: static; }
+    .sidebar-card { display:flex; overflow-x:auto; gap:4px; }
+    .side-link { white-space: nowrap; margin-bottom:0; }
+    .topheader { padding-left: 18px; padding-right: 18px; }
+    .hero { padding: 24px 18px 28px; }
+  }
+
+  /* ---------- KPI ---------- */
+  .kpi-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(190px,1fr)); gap: 14px; margin-bottom: 6px; }
+  .kpi-card {
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px 16px 14px; animation: fadeUp .4s ease both;
+  }
+  .kpi-label { font-size: 11.2px; color: var(--text-3); margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; }
+  .kpi-value { font-family:"Manrope",sans-serif; font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -.01em; }
+  .kpi-note { font-size: 11.8px; color: var(--text-3); margin-top: 6px; line-height:1.4; }
+  .kpi-input {
+    font-family:"Manrope",sans-serif; font-size: 19px; font-weight: 800; color: var(--text);
+    border: 1.5px dashed var(--accent); border-radius: 7px; padding: 3px 7px; width: 100%; background: var(--accent-soft);
+  }
+
+  /* ---------- Overview (flat dashboard) ---------- */
+  .ov-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 18px; box-shadow: var(--shadow-sm); animation: fadeUp .45s ease both;}
+  .ov-card h3 { margin: 0 0 4px; font-size: 15.5px; font-family:"Manrope",sans-serif; font-weight:700; display:flex; align-items:center; gap:8px; }
+  .ov-card h3::before { content:""; width:4px; height:14px; border-radius:3px; background: linear-gradient(180deg,var(--accent),var(--accent-2)); }
+  .ov-card .sub { font-size:12.3px; color:var(--text-3); margin-bottom:14px; }
+  .two-col { display:grid; grid-template-columns: 1.15fr .85fr; gap: 18px; }
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ---------- Accordion panel ---------- */
+  .acc-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); animation: fadeUp .4s ease both; }
+  .acc-item { border-bottom: 1px solid var(--border); }
+  .acc-item:last-child { border-bottom: none; }
+  .acc-header {
+    width: 100%; display:flex; align-items:center; gap: 14px; text-align: left;
+    background: none; border: none; font: inherit; cursor: pointer; padding: 17px 20px;
+    transition: background .15s ease;
+  }
+  .acc-header:hover { background: var(--surface-2); }
+  .acc-icon {
+    width: 40px; height: 40px; border-radius: 10px; background: var(--accent-soft); color: var(--accent);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .acc-icon svg { width: 20px; height: 20px; }
+  .acc-title { font-size: 14.5px; font-weight: 700; color: var(--text); }
+  .acc-summary { font-size: 12.3px; color: var(--text-3); margin-top: 2px; }
+  .acc-titlewrap { display:flex; flex-direction:column; gap:1px; }
+  .acc-chevron { margin-left: auto; color: var(--text-3); transition: transform .3s ease; flex-shrink:0; }
+  .acc-item.open .acc-chevron { transform: rotate(180deg); color: var(--accent); }
+  .acc-body-wrap { display:grid; grid-template-rows: 0fr; transition: grid-template-rows .35s cubic-bezier(.2,.8,.2,1); }
+  .acc-item.open .acc-body-wrap { grid-template-rows: 1fr; }
+  .acc-body { overflow: hidden; min-height: 0; }
+  .acc-content { padding: 4px 20px 22px 20px; }
+  .acc-content > * + * { margin-top: 16px; }
+
+  ul.bullets { margin:0; padding-left:0; color:var(--text-2); font-size:13.4px; line-height:1.68; list-style:none; }
+  ul.bullets li { margin-bottom:8px; padding-left:19px; position:relative; }
+  ul.bullets li::before { content:""; position:absolute; left:0; top:7px; width:6px; height:6px; border-radius:2px; background: linear-gradient(135deg,var(--accent),var(--accent-2)); }
+  ul.bullets.tight li { margin-bottom:4px; }
+
+  .chip-row { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip { background: var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:6px 11px; font-size:12px; color:var(--text-2); }
+  .chip b { color: var(--text); }
+
+  .badge { display:inline-block; font-size:11px; font-weight:700; padding:4px 11px; border-radius:20px; background:var(--accent-soft); color:var(--accent); }
+  .badge.bad { background: var(--danger-soft); color: var(--danger); }
+
+  table.data-table { width:100%; border-collapse:collapse; font-size:12.8px; }
+  table.data-table th { text-align:left; color:var(--text-3); font-weight:700; font-size:10.8px; text-transform:uppercase; letter-spacing:.04em; padding:9px 10px; border-bottom:1px solid var(--border); }
+  table.data-table td { padding:10px 10px; border-bottom:1px solid var(--border); color:var(--text-2); }
+  table.data-table tr:last-child td { border-bottom:none; }
+  .table-wrap { overflow-x:auto; }
+
+  .pill-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
+  @media (max-width:700px){ .pill-grid { grid-template-columns:1fr; } }
+  .step-pill { background: var(--surface-2); border:1px solid var(--border); border-radius:11px; padding:14px; }
+
+  .item-list { display:flex; flex-direction:column; gap:12px; }
+  .item-row { padding: 12px 14px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; }
+  .item-title { font-size:13.3px; font-weight:700; color:var(--text); margin-bottom:4px; }
+  .item-text { font-size:12.8px; color:var(--text-2); line-height:1.6; }
+
+  .loading-screen { display:flex; flex-direction:column; gap:16px; align-items:center; justify-content:center; height:100vh; color:var(--text-2); font-size:13.5px; background: var(--bg); }
+  .spinner { width:32px; height:32px; border-radius:50%; border:3px solid var(--border); border-top-color: var(--accent); animation: spin .8s linear infinite; }
+
+  .edit-banner { display:flex; align-items:center; gap:10px; background: var(--accent-soft); color: var(--accent); border:1px solid var(--accent); border-radius:11px; padding:11px 16px; font-size:12.5px; margin-bottom:16px; font-weight:500; }
+  .footer-note { font-size: 11.3px; color: var(--text-3); text-align:center; padding: 22px 0 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useCallback, useRef } = React;
+
+/* ============================================================
+   ICONS
+============================================================ */
+const ICONS = {
+  overview: <path d="M4 13h6V4H4v9zm0 7h6v-5H4v5zm10 0h6V11h-6v9zm0-16v5h6V4h-6z" />,
+  connectivity: <path d="M2 20h2v-2H2v2zm4 0h2v-4H6v4zm4 0h2v-8h-2v8zm4 0h2v-12h-2v12zm4 0h2V4h-2v16z" />,
+  fiber: <path d="M12 2a5 5 0 00-5 5c0 2.4 1.6 4.3 3.8 4.8L10 22h4l-.8-10.2A5 5 0 0017 7a5 5 0 00-5-5z" />,
+  investments: <path d="M3 17l5-5 4 4 8-9M20 7h-4v4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />,
+  govnet: <path d="M12 2l9 5v2H3V7l9-5zM5 10v8H3v2h18v-2h-2v-8h-2v8h-3v-8h-2v8H9v-8H7v8H5v-8z" />,
+  cctv: <path d="M4 8l11-4v14L4 14V8zm13-1.5V17.5a4 4 0 100-11z" />,
+  geoportal: <path d="M12 2C7 2 3 6 3 10.5 3 17 12 22 12 22s9-5 9-11.5C21 6 17 2 12 2zm0 11.5A3.5 3.5 0 1112 6a3.5 3.5 0 010 7.5z" />,
+  digital: <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />,
+  smartcity: <path d="M3 21V8l6-4 6 4v3l6 4v6h-6v-4h-2v4H3zm4-9h2V9H7v3zm0 4h2v-2H7v2zm6-4h2V9h-2v3z" />,
+  education: <path d="M12 3L2 8l10 5 8-4v6h2V8L12 3zM6 12.5V17c0 1.66 2.69 3 6 3s6-1.34 6-3v-4.5l-6 3-6-3z" />,
+  contact: <path d="M6.6 10.8a15.8 15.8 0 006.6 6.6l2.2-2.2a1 1 0 011.02-.24 11.3 11.3 0 003.5.56 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.23.2 2.42.56 3.5a1 1 0 01-.25 1.02l-2.2 2.28z" />,
+  bolt: <path d="M11 21l1-7H8l5-11h1l-1 7h4l-6 11z" />,
+  road: <path d="M10 2h4l1 20h-2l-.5-6h-2L10 22H8L10 2zm1.3 8h1.4l-.2-4h-1z" />,
+  shield: <path d="M12 2l8 3v6c0 5-3.4 8.9-8 11-4.6-2.1-8-6-8-11V5l8-3z" />,
+  chart: <path d="M4 20V10h3v10H4zm7 0V4h3v16h-3zm7 0v-7h3v7h-3z" />,
+};
+function Icon({ name }) { return <svg viewBox="0 0 24 24" fill="currentColor">{ICONS[name] || ICONS.overview}</svg>; }
+
+/* ============================================================
+   SEED DATA — Түркістан облысы, Управление цифровизации
+============================================================ */
+const OVERVIEW = {
+  kpis: [
+    { id: "ov1", label: "Населённых пунктов с интернетом", value: "801 / 801", note: "2 151 684 жителей" },
+    { id: "ov2", label: "Покрытие 4G/3G", value: "96%", note: "769 из 801 нп" },
+    { id: "ov3", label: "Оптоволокно (домохозяйства)", value: "52.3%", note: "154 490 домов из 295 941" },
+    { id: "ov4", label: "Эффективность ЦОН 109", value: "97.4%", note: "768 782 из 789 278 обращений" },
+    { id: "ov5", label: "Smart City — г. Туркестан", value: "65%", note: "20-е место в РК (2025)" },
+    { id: "ov6", label: "Инвестиции операторов, 2026 план", value: "4.93 млрд ₸", note: "109 точек 4G, 75 точек 5G" },
+  ],
+  coverageTrend: [
+    { label: "2024", g4: 341, g3: 398, gap: 68 },
+    { label: "2025", g4: 387, g3: 362, gap: 52 },
+    { label: "2026", g4: 612, g3: 157, gap: 32 },
+  ],
+  highlights: [
+    "612 нп обеспечены 4G (2 003 143 чел.), 157 нп — 3G (144 003 чел.), 32 нп ещё требуют покрытия (4 538 чел.).",
+    "95 зон несоответствия сигнала («белые пятна») выявлено, 74 устранено, 21 в работе.",
+    "419 из 801 нп охвачены оптоволокном; ещё 372 сельских нп охватываются по меморандуму с «Казахтелеком» до 2030 года.",
+    "Выявлены риски в сфере видеонаблюдения: децентрализованные закупки, стоимость оборудования в 2.3 раза выше проекта «Сергек».",
+    "Ведётся централизация геопортала, внедрение ИИ-аналитики (baqylay.kz, Road Scanner, видеоаналитика в школах).",
+  ],
+};
+
+const CATEGORIES = [
+  { id: "overview", title: "Обзор", standalone: true, pages: ["overview"] },
+  { id: "connectivity_group", title: "Связь и интернет", pages: ["connectivity", "fiber", "investments"] },
+  { id: "gov_group", title: "Госуслуги и инфраструктура", pages: ["govnet", "cctv", "geoportal"] },
+  { id: "digital_group", title: "Цифровизация региона", pages: ["digital", "smartcity", "education"] },
+  { id: "service_group", title: "Отчётность и сервисы", pages: ["contact"] },
+];
+
+const PAGES = {
+  connectivity: {
+    title: "Связь и покрытие", icon: "connectivity",
+    blocks: [
+      {
+        id: "conn_4g3g", icon: "connectivity", title: "Покрытие 4G и 3G",
+        summary: "612 нп на 4G, 157 нп на 3G",
+        kpis: [
+          { id: "c1", label: "Всего населённых пунктов", value: "801", note: "7 городов, 794 сельских нп" },
+          { id: "c2", label: "4G", value: "612 нп", note: "2 003 143 чел." },
+          { id: "c3", label: "3G", value: "157 нп", note: "144 003 чел." },
+          { id: "c4", label: "Требуют покрытия", value: "32 нп", note: "4 538 чел." },
+        ],
+        chart: { kind: "trend", data: [
+          { label: "2024", g4: 341, g3: 398, gap: 68 },
+          { label: "2025", g4: 387, g3: 362, gap: 52 },
+          { label: "2026", g4: 612, g3: 157, gap: 32 },
+        ] },
+      },
+      {
+        id: "conn_5g", icon: "bolt", title: "Сеть 5G",
+        summary: "196 базовых станций по области",
+        kpis: [{ id: "c5", label: "Базовые станции 5G", value: "196", note: "г. Туркестан, Кентау + 14 районов" }],
+        chart: { kind: "bar", colorVar: "--accent-2", data: [
+          { label: "г. Туркестан", value: 57 }, { label: "Сайрам р-н", value: 37 }, { label: "Жетысай р-н", value: 24 },
+          { label: "Сарыагаш р-н", value: 18 }, { label: "Ордабасы р-н", value: 11 }, { label: "Тюлькубас р-н", value: 11 },
+          { label: "Толеби р-н", value: 9 },
+        ] },
+        bullets: ["В 2026 году планируется запуск 5G в Арыси и Кентау с расширением зоны покрытия."],
+      },
+      {
+        id: "conn_whitespots", icon: "shield", title: "«Белые пятна» сигнала",
+        summary: "95 выявлено, 74 устранено, 21 в работе",
+        kpis: [{ id: "c6", label: "«Белые пятна» устранено", value: "74 / 95", note: "21 в процессе" }],
+        chart: { kind: "bar", colorVar: "--warning", data: [
+          { label: "Mobile Telecom-Service", value: 27 }, { label: "KaR-Tel (Beeline)", value: 32 }, { label: "Kcell", value: 36 },
+        ] },
+        bullets: [
+          "г. Туркестан — 2 зоны: проблема радиофобии населения, ведётся разъяснительная работа акимата.",
+          "г. Кентау — 7 зон: оформление земельных участков, планируется завершить до конца года.",
+          "Мактааральский р-н — 4 зоны: оформление земельных участков, до конца года.",
+          "Сайрамский р-н (с. Карабулак) — 8 зон: радиопланирование под БС, сложности из-за плотной застройки.",
+        ],
+      },
+      {
+        id: "conn_notes", icon: "chart", title: "Планы и примечания",
+        summary: "Обязательства операторов до 2030 года",
+        bullets: [
+          "К 2030 году лицензионные обязательства операторов охватывают ещё 7 нп (2 082 чел.) из оставшихся 32.",
+          "25 нп (2 456 чел.) с населением менее 250 чел. и сложным рельефом — ведутся дополнительные работы.",
+        ],
+      },
+    ],
+  },
+  fiber: {
+    title: "Оптоволоконный интернет", icon: "fiber",
+    blocks: [
+      {
+        id: "fiber_coverage", icon: "fiber", title: "Охват оптоволокном",
+        summary: "52.3% домохозяйств подключено",
+        kpis: [
+          { id: "f1", label: "Домохозяйств всего", value: "339 537", note: "801 населённый пункт" },
+          { id: "f2", label: "Охват оптоволокном", value: "52.3%", note: "154 490 домов / 419 нп" },
+        ],
+        chart: { kind: "donut", data: [
+          { label: "Оптоволокно", value: 46451 }, { label: "ADSL / FTTH / FTTx / радиомост / LTE", value: 68341 },
+        ] },
+      },
+      {
+        id: "fiber_plan", icon: "chart", title: "Программа развития до 2030 года",
+        summary: "2 638 км по меморандуму с «Казахтелеком»",
+        kpis: [
+          { id: "f3", label: "ВОЛС по меморандуму", value: "2 638 км", note: "372 сельских нп до 2030 г." },
+          { id: "f4", label: "Уже проложено", value: "670 км", note: "97 нп (Арыс, Отырар, Жетысай, Байдибек)" },
+          { id: "f5", label: "SWAP-проект (замена на оптику)", value: "13 105", note: "абонентов ADSL/FTTx → оптика" },
+          { id: "f6", label: "Осталось охватить до 2030", value: "251 400", note: "программа субсидирования «последней мили»" },
+        ],
+        bullets: [
+          "27.06.2025 подписан меморандум акимата области и «Казахтелеком» АО о развитии связи и интернета — 372 сельских нп.",
+          "10 нп с труднодоступной сельской местностью охвачены спутниковым Wi-Fi OneWeb.",
+        ],
+      },
+    ],
+  },
+  investments: {
+    title: "Инвестиции операторов", icon: "investments",
+    blocks: [
+      {
+        id: "inv_dynamics", icon: "investments", title: "Динамика инвестиций",
+        summary: "4.93 млрд ₸ запланировано на 2026 год",
+        kpis: [
+          { id: "i1", label: "2024, всего", value: "3.5 млрд ₸", note: "121 новая БС, 28 модернизировано" },
+          { id: "i2", label: "2025, всего", value: "3.8 млрд ₸", note: "129 новых БС, 30 модернизировано" },
+          { id: "i3", label: "2026, план", value: "4.93 млрд ₸", note: "109 точек 4G, 75 точек 5G" },
+          { id: "i4", label: "5G БС (динамика)", value: "42 → 57 → 75", note: "2024 → 2025 → 2026" },
+        ],
+        chart: { kind: "bar", colorVar: "--accent", valueSuffix: " млрд", data: [
+          { label: "2024", value: 3.5 }, { label: "2025", value: 3.8 }, { label: "2026 (план)", value: 4.93 },
+        ] },
+      },
+      {
+        id: "inv_table", icon: "chart", title: "Детализация по операторам",
+        summary: "Kcell, KaR-Tel, Казахтелеком, Транстелеком",
+        table: {
+          head: ["Год", "Оператор", "Сумма", "Комментарий"],
+          rows: [
+            ["2024", "Kcell АО", "2.2 млрд ₸", "5G — 1.3 млрд ₸"],
+            ["2024", "KaR-Tel ТОО", "1.3 млрд ₸", "—"],
+            ["2025", "Kcell АО", "3.0 млрд ₸", "5G — 1.7 млрд ₸"],
+            ["2025", "KaR-Tel ТОО", "0.8 млрд ₸", "GPON в 4 мкр Туркестана — 0.4 млрд ₸"],
+            ["2025", "Казахтелеком АО", "1.2 млрд ₸", "замена ADSL → оптика в г. Туркестан + Толеби/Казыгурт/Байдибек"],
+            ["2026 (план)", "Kcell АО", "4.4 млрд ₸", "—"],
+            ["2026 (план)", "KaR-Tel ТОО", "0.525 + 0.35 млрд ₸", "11 совмещённых точек в Туркестане и Кентау"],
+            ["2026 (план)", "Казахтелеком / Транстелеком", "≈1 млрд ₸", "прокладка ВОЛС по области"],
+          ],
+        },
+      },
+    ],
+  },
+  govnet: {
+    title: "Госучреждения и школы", icon: "govnet",
+    blocks: [
+      {
+        id: "gov_orgs", icon: "govnet", title: "Государственные учреждения",
+        summary: "1 225 из 2 163 учреждений подключено",
+        kpis: [
+          { id: "g1", label: "Учреждений всего", value: "2 163", note: "938 школ, 1 225 гос. учреждений" },
+          { id: "g2", label: "Подключено управлением", value: "1 225", note: "124 акимата, 141 отдел" },
+        ],
+        chart: { kind: "bar", colorVar: "--accent", data: [
+          { label: "Акиматы", value: 124 }, { label: "Отделы", value: 141 }, { label: "Детсады", value: 231 },
+          { label: "Ветеринария", value: 239 }, { label: "Культура", value: 21 }, { label: "Библиотеки", value: 66 },
+          { label: "Архивы", value: 17 }, { label: "Подведом.", value: 386 },
+        ] },
+      },
+      {
+        id: "gov_schools", icon: "education", title: "Школы и подключение",
+        summary: "938 школ: 676 оптика, 255 Starlink",
+        kpis: [
+          { id: "g3", label: "Школ подключено", value: "938", note: "676 оптика, 255 Starlink" },
+          { id: "g4", label: "Школ закрывается", value: "7", note: "по объективным причинам" },
+        ],
+        chart: { kind: "donut", data: [
+          { label: "ВОЛС (Казахтелеком)", value: 478 }, { label: "ВОЛС (Транстелеком)", value: 198 }, { label: "Starlink", value: 255 },
+        ] },
+      },
+    ],
+  },
+  cctv: {
+    title: "Видеонаблюдение", icon: "cctv",
+    blocks: [
+      {
+        id: "cctv_current", icon: "cctv", title: "Текущее состояние",
+        summary: "Децентрализованные закупки, 24 процедуры",
+        kpis: [
+          { id: "v1", label: "Закупочных процедур, 2023–2026", value: "24", note: "на сумму 1.72 млрд ₸" },
+          { id: "v2", label: "Оплачено", value: "650 млн ₸", note: "из 1.72 млрд ₸" },
+          { id: "v3", label: "Расторгнуто договоров, 2026", value: "≈600 млн ₸", note: "включая Казыгуртский р-н" },
+        ],
+        chips: ["Hikvision", "Dahua", "UNIVIEW", "RVi"],
+        bullets: [
+          "Закупки и обслуживание камер осуществляются децентрализованно — каждым акиматом отдельно за счёт местного бюджета.",
+          "Единого стандарта технических требований и подхода к ценообразованию обслуживания нет.",
+          "В ряде закупок отсутствовало требование интеграции с Центром оперативного управления (ЦОУ).",
+        ],
+      },
+      {
+        id: "cctv_cost", icon: "chart", title: "Сравнение стоимости с проектом «Сергек»",
+        summary: "Комплекс дороже в 2.3 раза",
+        kpis: [
+          { id: "v4", label: "Комплекс дороже проекта «Сергек»", value: "в 2.3 раза", note: "15.88 млн ₸ против 6.84 млн ₸" },
+          { id: "v5", label: "Камера дороже", value: "на 32%", note: "1.32 млн ₸ против 0.997 млн ₸" },
+          { id: "v6", label: "Переплата за обслуживание", value: "≈2 раза", note: "496 800 ₸/камеру при 320 камерах" },
+          { id: "v7", label: "Пример: г. Туркестан", value: "485 / 425", note: "камер закуплено / передано полиции" },
+        ],
+      },
+      {
+        id: "cctv_plan", icon: "shield", title: "План централизации",
+        summary: "Инвентаризация → единый баланс → сервис",
+        pills: [
+          { title: "Инвентаризация", desc: "Учёт всех камер: местоположение, техническая спецификация, функциональные возможности." },
+          { title: "Единый баланс", desc: "Передача камер на баланс Управления цифровизации." },
+          { title: "Централизованное обслуживание", desc: "Единая система техобслуживания и единые требования к закупкам." },
+        ],
+        bullets: [
+          "Обязать акиматы районов и городов согласовывать бюджетные заявки на видеонаблюдение с Управлением цифровизации.",
+          "Интегрировать единую базу камер с геопорталом для анализа избыточных и непокрытых зон.",
+        ],
+      },
+    ],
+  },
+  geoportal: {
+    title: "Геопортал", icon: "geoportal",
+    blocks: [
+      {
+        id: "geo_modules", icon: "geoportal", title: "Модули геопортала",
+        summary: "6 направлений: земля, дороги, ЖКХ и др.",
+        kpis: [{ id: "p1", label: "Направлений на геопортале", value: "6", note: "земля, с/х, недра, дороги, ЖКХ, архитектура" }],
+        chips: ["Земельные отношения", "Сельское хозяйство", "Недропользование", "Автомобильные дороги", "ЖКХ", "Архитектура и градостроительство"],
+      },
+      {
+        id: "geo_ai", icon: "chart", title: "ИИ и геоаналитика",
+        summary: "5 направлений автоматизации",
+        kpis: [{ id: "p3", label: "ИИ-направлений геоаналитики", value: "5", note: "дороги, реклама, аренда, кладбища, ярмарки" }],
+        bullets: [
+          "Анализ и мониторинг состояния дорожного покрытия (выбоины, трещины).",
+          "Мониторинг размещения объектов наружной рекламы.",
+          "Контроль исполнения условий договоров аренды земельных участков.",
+          "Инвентаризация и учёт кладбищ и мест захоронений.",
+          "Мониторинг проведения ярмарок и контроль их деятельности.",
+        ],
+      },
+      {
+        id: "geo_other", icon: "bolt", title: "Прочие проекты",
+        summary: "«zhasyl_zhelek», «gask», земельные аукционы",
+        kpis: [{ id: "p2", label: "Районов в «zhasyl_zhelek»", value: "6", note: "Арыс, Мактаарал, Тюлькубас, Казыгурт, Отырар, Сауран" }],
+        bullets: [
+          "Пилотный проект электронных земельных аукционов — портал готов, ожидает запуска.",
+          "Система «gask» автоматизирует контроль в сфере строительства.",
+        ],
+      },
+    ],
+  },
+  digital: {
+    title: "Цифровые услуги", icon: "digital",
+    blocks: [
+      {
+        id: "dig_school", icon: "education", title: "Tomorrow School",
+        summary: "92.8 млн ₸, 50 компьютеров, 100% оснащение",
+        kpis: [{ id: "d1", label: "Финансирование", value: "92.8 млн ₸", note: "50 компьютеров, 100% оснащение" }],
+        bullets: ["Первая в Казахстане peer-to-peer школа для взрослых от 16 лет по направлениям IT и AI. Первый набор — со следующего месяца."],
+      },
+      {
+        id: "dig_elektorat", icon: "shield", title: "«Электорат»",
+        summary: "Автоматизация списков избирателей",
+        bullets: ["Информационная система автоматического ведения списков избирателей на основе ИИН; исключает дублирование, ускоряет сверку, формирует аналитические дашборды."],
+      },
+      {
+        id: "dig_open", icon: "chart", title: "Открытые данные и мониторинг",
+        summary: "100% актуальность данных, 24 управления",
+        kpis: [
+          { id: "d2", label: "Открытые данные", value: "100%", note: "обновление ежемесячно/полугодично/ежегодно" },
+          { id: "d3", label: "Мониторинг gov.kz", value: "24 управления", note: "+ акиматы районов, ежеквартально" },
+        ],
+      },
+    ],
+  },
+  smartcity: {
+    title: "Smart City / Region", icon: "smartcity",
+    blocks: [
+      {
+        id: "sc_index", icon: "smartcity", title: "Индекс Smart City",
+        summary: "65%, 20-е место в РК (2025)",
+        kpis: [
+          { id: "s1", label: "Индекс Smart City (Туркестан)", value: "65%", note: "20-е место в РК, по итогам 2025 г." },
+          { id: "s2", label: "Обследовано дорог (Road Scanner)", value: "350 км", note: "пилот, ИИ-анализ дефектов" },
+        ],
+      },
+      {
+        id: "sc_iot", icon: "bolt", title: "IoT и умные счётчики",
+        summary: "Электричество, вода, тепло",
+        kpis: [
+          { id: "s3", label: "Умные счётчики электроэнергии", value: "20 300 / 55 000", note: "через АСКУЭ" },
+          { id: "s4", label: "Умные счётчики воды", value: "1 432 / 58 059", note: "через Smart Metrics" },
+        ],
+        bullets: ["Договор с «Arna Smart» на установку 10 000 счётчиков тепла в 2026 г., первый этап — мкр «Отырар» и «Жаңа қала»."],
+      },
+      {
+        id: "sc_directions", icon: "chart", title: "13 направлений Smart City / Region",
+        summary: "От ситуационного центра до АСУДД",
+        bullets: [
+          "ИИ-помощник в ситуационном центре (Smart Data Ukimet)", "Единый центр связи «Komek 109»",
+          "Единый центр расчётов («Smart Turmys»)", "Интегрированная система городского транспорта",
+          "Контроль качества автодорог (Road Scanner)", "Единая система видеонаблюдения",
+          "Управление пожарной безопасностью", "Контроль озеленения («zhasyl_zhelek»)",
+          "Управление твёрдыми бытовыми отходами", "Умные счётчики электроэнергии и IoT",
+          "Умные счётчики воды и IoT", "Умные счётчики тепла (план 2026–2028)", "АСУДД",
+        ],
+      },
+    ],
+  },
+  education: {
+    title: "Образование и AI-пилоты", icon: "education",
+    blocks: [
+      {
+        id: "edu_stats", icon: "education", title: "Достижения",
+        summary: "52 команды Robotek, 93% сертифицировано",
+        kpis: [
+          { id: "e1", label: "Robotek Grand Tournament 2026", value: "52 команды", note: "99 учеников, 4 призовых места в РК" },
+          { id: "e2", label: "Сертифицировано госслужащих", value: "93%", note: "3 252 из 3 483" },
+          { id: "e3", label: "Пилотных ИИ-проектов", value: "6", note: "baqylay.kz, видеоаналитика и др." },
+        ],
+      },
+      {
+        id: "edu_pilots", icon: "bolt", title: "Пилотные проекты",
+        summary: "baqylay.kz, Documentolog, Face ID и др.",
+        items: [
+          { title: "baqylay.kz", text: "ИИ-платформа мониторинга госзакупок (завышение цен, дробление, аффилированность)." },
+          { title: "ИИ-видеоаналитика", text: "Распознавание буллинга и угроз — пилот в школе №11 им. Ж. Жабаева." },
+          { title: "Documentolog", text: "Автоматизация документооборота — 938 школ бесплатно до конца 2026 г., далее скидка 60%." },
+          { title: "Face ID + HikCentral", text: "Учёт посещаемости — Кентауский колледж и колледж №7." },
+          { title: "Fortinet (защита детей)", text: "Пилот в 3 школах, интеграция камер с ЦОУ Полиции." },
+          { title: "ИИ-агент для канцелярии", text: "Цель — сократить нагрузку на 30% совместно с Documentolog." },
+        ],
+      },
+    ],
+  },
+  contact: {
+    title: "ЦОН 109 и архив", icon: "contact",
+    blocks: [
+      {
+        id: "con_stats", icon: "contact", title: "Показатели ЦОН 109",
+        summary: "97.4% эффективности, 789 278 обращений",
+        kpis: [
+          { id: "k1", label: "Обращений всего (с 2022 г.)", value: "789 278", note: "с 18 июля 2022 г." },
+          { id: "k2", label: "Решено вовремя", value: "768 782", note: "97.4% эффективности" },
+          { id: "k3", label: "С начала 2026 г.", value: "81 604", note: "80 676 закрыто вовремя, 524 в работе" },
+          { id: "k4", label: "Через звонок 109", value: "80 370", note: "98.5% всех обращений" },
+        ],
+      },
+      {
+        id: "con_channels", icon: "chart", title: "Каналы и темы обращений",
+        summary: "109, WhatsApp, Telegram, Aikey",
+        chart: { kind: "donut", data: [
+          { label: "Звонок 109", value: 80370 }, { label: "WhatsApp", value: 1056 }, { label: "Мониторинг", value: 72 },
+          { label: "Telegram", value: 35 }, { label: "Aikey", value: 15 }, { label: "Facebook", value: 1 },
+        ] },
+        bullets: [],
+      },
+      {
+        id: "con_topics", icon: "bolt", title: "Топ тем обращений",
+        summary: "Электроэнергия, водоснабжение, газ",
+        chart: { kind: "bar", colorVar: "--accent-2", data: [
+          { label: "Электроэнергия", value: 47118 }, { label: "Ветеринария", value: 6289 }, { label: "Освещение", value: 2702 },
+          { label: "Водоснабжение", value: 2136 }, { label: "Газ", value: 1049 },
+        ] },
+      },
+      {
+        id: "con_archive", icon: "shield", title: "Архивное дело",
+        summary: "Единая база сканированных документов",
+        bullets: ["Формируется единая база сканированных архивных документов.", "Проводится разъяснительная работа с сотрудниками архивов."],
+      },
+    ],
+  },
+};
+
+const PAGE_TITLES = Object.fromEntries(Object.entries(PAGES).map(([id, p]) => [id, p.title]));
+const CATEGORY_OF_PAGE = {};
+CATEGORIES.forEach(c => c.pages.forEach(p => { CATEGORY_OF_PAGE[p] = c; }));
+
+/* ============================================================
+   Animated counter
+============================================================ */
+function useAnimatedValue(raw) {
+  const match = String(raw).match(/^([^\d]*)([\d\s]+(?:[.,]\d+)?)(.*)$/);
+  const [display, setDisplay] = useState(raw);
+  useEffect(() => {
+    if (!match) { setDisplay(raw); return; }
+    const [, prefix, numPart, suffix] = match;
+    const clean = numPart.replace(/\s/g, "").replace(",", ".");
+    const target = parseFloat(clean);
+    if (isNaN(target)) { setDisplay(raw); return; }
+    const isInt = !clean.includes(".");
+    const duration = 650; const start = performance.now(); let raf;
+    function step(now) {
+      const p = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = target * eased;
+      const formatted = isInt ? Math.round(val).toLocaleString("ru-RU") : val.toFixed(clean.split(".")[1]?.length || 1);
+      setDisplay(prefix + formatted + suffix);
+      if (p < 1) raf = requestAnimationFrame(step);
+    }
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [raw]);
+  return display;
+}
+
+/* ============================================================
+   Charts
+============================================================ */
+function BarChart({ data, height = 180, colorVar = "--accent", valueSuffix = "" }) {
+  const [grown, setGrown] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setGrown(true), 30); return () => clearTimeout(t); }, [data]);
+  const max = Math.max(1, ...data.map(d => d.value));
+  const gid = "bg-" + colorVar.replace("--", "");
+  return (
+    <svg viewBox="0 0 600 210" style={{ width: "100%", height, overflow: "visible" }} preserveAspectRatio="none">
+      <defs><linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor={`var(${colorVar})`} stopOpacity="1" />
+        <stop offset="100%" stopColor={`var(${colorVar})`} stopOpacity=".55" />
+      </linearGradient></defs>
+      {data.map((d, i) => {
+        const barH = grown ? (d.value / max) * 150 : 0;
+        const x = i * (600 / data.length) + 10;
+        const bw = (600 / data.length) - 20;
+        return (
+          <g key={i}>
+            <rect x={x} y={170 - barH} width={bw} height={barH} rx="5" fill={`url(#${gid})`}
+              style={{ transition: `height .7s cubic-bezier(.2,.8,.2,1) ${i * 60}ms, y .7s cubic-bezier(.2,.8,.2,1) ${i * 60}ms` }} />
+            <text x={x + bw / 2} y={188} textAnchor="middle" fontSize="11" fill="var(--text-3)">{d.label}</text>
+            <text x={x + bw / 2} y={162 - barH} textAnchor="middle" fontSize="11.5" fontWeight="700" fill="var(--text)"
+              style={{ opacity: grown ? 1 : 0, transition: `y .7s ease ${i * 60}ms, opacity .4s ease ${i * 60 + 200}ms` }}>
+              {d.value}{valueSuffix}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+function GroupedTrend({ data }) {
+  const [grown, setGrown] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setGrown(true), 30); return () => clearTimeout(t); }, [data]);
+  const max = Math.max(1, ...data.flatMap(d => [d.g4, d.g3, d.gap]));
+  const seriesKeys = [["g4", "--accent", "4G"], ["g3", "--accent-2", "3G"], ["gap", "--warning", "Нет покрытия"]];
+  const groupW = 600 / data.length;
+  return (
+    <div>
+      <svg viewBox="0 0 600 210" style={{ width: "100%", height: 185, overflow: "visible" }} preserveAspectRatio="none">
+        {data.map((d, i) => {
+          const gx = i * groupW;
+          return (
+            <g key={i}>
+              {seriesKeys.map(([key, colorVar], si) => {
+                const barH = grown ? (d[key] / max) * 145 : 0;
+                const bw = (groupW - 30) / 3;
+                const x = gx + 15 + si * bw;
+                return <rect key={key} x={x} y={165 - barH} width={bw - 4} height={barH} rx="4" fill={`var(${colorVar})`} opacity=".92"
+                  style={{ transition: `height .7s cubic-bezier(.2,.8,.2,1) ${(i * 3 + si) * 55}ms, y .7s cubic-bezier(.2,.8,.2,1) ${(i * 3 + si) * 55}ms` }} />;
+              })}
+              <text x={gx + groupW / 2} y={184} textAnchor="middle" fontSize="12.3" fontWeight="700" fill="var(--text-2)">{d.label}</text>
+            </g>
+          );
+        })}
+      </svg>
+      <div className="chip-row">
+        {seriesKeys.map(([key, colorVar, label]) => (
+          <span className="chip" key={key}><span style={{ display:"inline-block", width:8, height:8, borderRadius:2, background:`var(${colorVar})`, marginRight:6 }} />{label}</span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Donut({ data, size = 148 }) {
+  const [grown, setGrown] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setGrown(true), 30); return () => clearTimeout(t); }, [data]);
+  const total = data.reduce((s, d) => s + d.value, 0) || 1;
+  const colors = ["--accent", "--accent-2", "--warning", "--danger", "--success", "--accent-3"];
+  let acc = 0; const r = 58, c = 2 * Math.PI * r;
+  return (
+    <div style={{ display:"flex", alignItems:"center", gap:18, flexWrap:"wrap" }}>
+      <svg width={size} height={size} viewBox="0 0 150 150">
+        <g transform="translate(75,75) rotate(-90)">
+          <circle r={r} fill="none" stroke="var(--border)" strokeWidth="16" />
+          {data.map((d, i) => {
+            const frac = d.value / total;
+            const dash = grown ? frac * c : 0;
+            const offset = grown ? -acc : 0;
+            const el = <circle key={i} r={r} fill="none" stroke={`var(${colors[i % colors.length]})`} strokeWidth="16"
+              strokeDasharray={`${dash} ${c - dash}`} strokeDashoffset={offset} strokeLinecap="round"
+              style={{ transition: `stroke-dasharray .8s cubic-bezier(.2,.8,.2,1) ${i * 90}ms` }} />;
+            acc += frac * c; return el;
+          })}
+        </g>
+        <text x="75" y="80" textAnchor="middle" fontSize="18" fontWeight="800" fontFamily="Manrope, sans-serif" fill="var(--text)">{total.toLocaleString("ru-RU")}</text>
+      </svg>
+      <div className="chip-row" style={{ marginTop:0 }}>
+        {data.map((d, i) => (
+          <span className="chip" key={i}><span style={{ display:"inline-block", width:8, height:8, borderRadius:2, background:`var(${colors[i % colors.length]})`, marginRight:6 }} />{d.label}: <b>{d.value.toLocaleString("ru-RU")}</b></span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   KPI
+============================================================ */
+function KpiCard({ kpi, editable, onChange, index }) {
+  const animated = useAnimatedValue(kpi.value);
+  return (
+    <div className="kpi-card" style={{ animationDelay: (index * 40) + "ms" }}>
+      <div className="kpi-label">{kpi.label}</div>
+      {editable ? <input className="kpi-input" value={kpi.value} onChange={(e) => onChange(kpi.id, e.target.value)} /> : <div className="kpi-value">{animated}</div>}
+      {kpi.note && <div className="kpi-note">{kpi.note}</div>}
+    </div>
+  );
+}
+function KpiGrid({ kpis, editable, onChange }) {
+  return <div className="kpi-grid">{kpis.map((k, i) => <KpiCard key={k.id} kpi={k} editable={editable} onChange={onChange} index={i} />)}</div>;
+}
+
+/* ============================================================
+   Accordion block content
+============================================================ */
+function renderChart(chart) {
+  if (chart.kind === "bar") return <BarChart data={chart.data} colorVar={chart.colorVar || "--accent"} valueSuffix={chart.valueSuffix || ""} />;
+  if (chart.kind === "donut") return <Donut data={chart.data} />;
+  if (chart.kind === "trend") return <GroupedTrend data={chart.data} />;
+  return null;
+}
+
+function BlockContent({ block, editable, onKpiChange }) {
+  return (
+    <div className="acc-content">
+      {block.kpis && <KpiGrid kpis={block.kpis} editable={editable} onChange={onKpiChange} />}
+      {block.chart && renderChart(block.chart)}
+      {block.chips && <div className="chip-row">{block.chips.map((c, i) => <span className="chip" key={i}>{c}</span>)}</div>}
+      {block.bullets && block.bullets.length > 0 && <ul className="bullets">{block.bullets.map((t, i) => <li key={i}>{t}</li>)}</ul>}
+      {block.table && (
+        <div className="table-wrap"><table className="data-table">
+          <thead><tr>{block.table.head.map((h, i) => <th key={i}>{h}</th>)}</tr></thead>
+          <tbody>{block.table.rows.map((row, i) => <tr key={i}>{row.map((c, j) => <td key={j}>{c}</td>)}</tr>)}</tbody>
+        </table></div>
+      )}
+      {block.pills && (
+        <div className="pill-grid">{block.pills.map((s, i) => (
+          <div key={i} className="step-pill"><span className="badge">Шаг {i + 1}</span>
+            <div style={{ fontWeight:700, margin:"9px 0 4px", fontSize:13.4 }}>{s.title}</div>
+            <div style={{ fontSize:12.4, color:"var(--text-2)" }}>{s.desc}</div>
+          </div>
+        ))}</div>
+      )}
+      {block.items && (
+        <div className="item-list">{block.items.map((it, i) => (
+          <div className="item-row" key={i}><div className="item-title">{it.title}</div><div className="item-text">{it.text}</div></div>
+        ))}</div>
+      )}
+    </div>
+  );
+}
+
+function AccordionBlock({ block, isOpen, onToggle, editable, onKpiChange }) {
+  return (
+    <div className={"acc-item" + (isOpen ? " open" : "")}>
+      <button className="acc-header" onClick={onToggle}>
+        <span className="acc-icon"><Icon name={block.icon} /></span>
+        <span className="acc-titlewrap">
+          <span className="acc-title">{block.title}</span>
+          {block.summary && <span className="acc-summary">{block.summary}</span>}
+        </span>
+        <span className="acc-chevron">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9l6 6 6-6" /></svg>
+        </span>
+      </button>
+      <div className="acc-body-wrap"><div className="acc-body">
+        <BlockContent block={block} editable={editable} onKpiChange={onKpiChange} />
+      </div></div>
+    </div>
+  );
+}
+
+function PageAccordion({ page, editable, onKpiChange }) {
+  const [openIds, setOpenIds] = useState(() => new Set(page.blocks[0] ? [page.blocks[0].id] : []));
+  useEffect(() => { setOpenIds(new Set(page.blocks[0] ? [page.blocks[0].id] : [])); }, [page]);
+  const toggle = (id) => setOpenIds(prev => {
+    const next = new Set(prev);
+    next.has(id) ? next.delete(id) : next.add(id);
+    return next;
+  });
+  return (
+    <div className="acc-panel">
+      {page.blocks.map(b => (
+        <AccordionBlock key={b.id} block={b} isOpen={openIds.has(b.id)} onToggle={() => toggle(b.id)} editable={editable} onKpiChange={onKpiChange} />
+      ))}
+    </div>
+  );
+}
+
+/* ============================================================
+   Overview (flat dashboard, not accordion)
+============================================================ */
+function OverviewView({ data, editable, onKpiChange }) {
+  return (
+    <>
+      <div className="ov-card"><KpiGrid kpis={data.kpis} editable={editable} onChange={onKpiChange} /></div>
+      <div className="two-col">
+        <div className="ov-card">
+          <h3>Динамика покрытия связью, 2024–2026</h3>
+          <div className="sub">Количество населённых пунктов по типу покрытия</div>
+          <GroupedTrend data={data.coverageTrend} />
+        </div>
+        <div className="ov-card">
+          <h3>Ключевые выводы</h3>
+          <ul className="bullets">{data.highlights.map((h, i) => <li key={i}>{h}</li>)}</ul>
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* ============================================================
+   App
+============================================================ */
+function App() {
+  const [overview, setOverview] = useState(null);
+  const [pages, setPages] = useState(null);
+  const [activeCategory, setActiveCategory] = useState("overview");
+  const [activePage, setActivePage] = useState("overview");
+  const [dbNs, setDbNs] = useState(null);
+  const [saving, setSaving] = useState(false);
+  const [savedAt, setSavedAt] = useState(null);
+  const pendingSave = useRef(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    const failsafe = setTimeout(() => {
+      setOverview(prev => prev || OVERVIEW);
+      setPages(prev => prev || PAGES);
+    }, 4000);
+    async function init() {
+      let db = null, user = null;
+      try { db = window.claude ? await window.claude.use("db") : null; } catch (e) { db = null; }
+      try { user = window.claude ? await window.claude.use("user") : null; } catch (e) { user = null; }
+      if (cancelled) return;
+      setDbNs(db);
+      if (db) {
+        try {
+          const snap = await db.doc("dashboard/main").get();
+          if (snap && snap.exists) {
+            const body = snap.data();
+            if (body && body.overview && body.pages) {
+              if (!cancelled) { setOverview(body.overview); setPages(body.pages); }
+              return;
+            }
+          }
+        } catch (e) { /* fall through to seed */ }
+        try { await db.doc("dashboard/main").set({ overview: OVERVIEW, pages: PAGES }); } catch (e) { /* ignore */ }
+      }
+      if (!cancelled) { setOverview(OVERVIEW); setPages(PAGES); }
+    }
+    init().finally(() => clearTimeout(failsafe));
+    return () => { cancelled = true; clearTimeout(failsafe); };
+  }, []);
+
+  const persist = useCallback((nextOverview, nextPages) => {
+    if (!dbNs) return;
+    clearTimeout(pendingSave.current);
+    pendingSave.current = setTimeout(async () => {
+      setSaving(true);
+      try { await dbNs.doc("dashboard/main").set({ overview: nextOverview, pages: nextPages }); setSavedAt(new Date()); }
+      catch (e) { /* ignore */ }
+      setSaving(false);
+    }, 500);
+  }, [dbNs]);
+
+  const handleOverviewKpiChange = useCallback((id, value) => {
+    setOverview(prev => {
+      const next = { ...prev, kpis: prev.kpis.map(k => k.id === id ? { ...k, value } : k) };
+      persist(next, pages); return next;
+    });
+  }, [persist, pages]);
+
+  const handlePageKpiChange = useCallback((pageId) => (id, value) => {
+    setPages(prev => {
+      const page = prev[pageId];
+      const blocks = page.blocks.map(b => b.kpis ? { ...b, kpis: b.kpis.map(k => k.id === id ? { ...k, value } : k) } : b);
+      const next = { ...prev, [pageId]: { ...page, blocks } };
+      persist(overview, next); return next;
+    });
+  }, [persist, overview]);
+
+  if (!overview || !pages) {
+    return <div className="loading-screen"><div className="spinner" />Загрузка панели показателей…</div>;
+  }
+
+  const category = CATEGORIES.find(c => c.id === activeCategory) || CATEGORIES[0];
+  const isOverview = category.standalone;
+  const page = isOverview ? null : pages[activePage];
+
+  function selectCategory(cat) {
+    setActiveCategory(cat.id);
+    setActivePage(cat.pages[0]);
+  }
+
+  return (
+    <div>
+      <header className="topheader">
+        <div className="th-brand">
+          <div className="th-mark">Т</div>
+          <div><div className="th-name">Түркістан облысы</div><div className="th-sub">Цифрландыру басқармасы</div></div>
+        </div>
+        <nav className="th-tabs">
+          {CATEGORIES.map(c => (
+            <button key={c.id} className={"th-tab" + (activeCategory === c.id ? " active" : "")} onClick={() => selectCategory(c)}>{c.title}</button>
+          ))}
+        </nav>
+        <div className="th-actions">
+          {saving && <span style={{ fontSize:12, color:"var(--text-3)" }}>Сохранение…</span>}
+          {!saving && savedAt && <span style={{ fontSize:12, color:"var(--success)" }}>Сохранено</span>}
+        </div>
+      </header>
+
+      <div className="hero">
+        <svg className="hero-decor" viewBox="0 0 1200 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 160 L150 90 L280 140 L420 60 L560 130 L700 80 L860 150 L1000 70 L1200 140 L1200 200 L0 200 Z" fill="rgba(255,255,255,.06)" />
+          <path d="M0 180 L200 130 L380 170 L520 110 L680 160 L860 120 L1050 175 L1200 150 L1200 200 L0 200 Z" fill="rgba(255,255,255,.09)" />
+        </svg>
+        <div className="hero-inner">
+          <div className="crumbs">
+            <span>Главная</span><span className="sep">›</span>
+            <span>{category.title}</span>
+            {!isOverview && <><span className="sep">›</span><b>{page.title}</b></>}
+          </div>
+          <h1 className="hero-title">{isOverview ? "Обзор показателей" : page.title}</h1>
+          <div className="hero-meta">
+            <span className="hero-pill">Отчёт для руководства</span>
+            <span className="hero-pill">Түркістан облысы · обновлено 2026 ж.</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="layout">
+        {!isOverview && (
+          <div className="sidebar-col">
+            <div className="sidebar-card">
+              {category.pages.map(pid => (
+                <div key={pid} className={"side-link" + (activePage === pid ? " active" : "")} onClick={() => setActivePage(pid)}>
+                  {PAGE_TITLES[pid]}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        <div className="content-col">
+          {isOverview
+            ? <OverviewView data={overview} editable={false} onKpiChange={handleOverviewKpiChange} />
+            : <PageAccordion key={activePage} page={page} editable={false} onKpiChange={handlePageKpiChange(activePage)} />}
+          <div className="footer-note">Данные сформированы на основе отчёта Управления цифровизации, государственных услуг и архивов Түркістан облысы.</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
